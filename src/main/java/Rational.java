@@ -30,7 +30,7 @@ public class Rational {
         int new_num_right = s.numerator * r.denominator;
         int new_denom = r.denominator * s.denominator;
         Rational add = new Rational(new_num_left + new_num_right,  new_denom);
-        return add;
+        return simplify(add);
     }
 
     // This method takes two Rationals, subtracts thems up, 
@@ -40,21 +40,21 @@ public class Rational {
         int new_num_right = s.numerator * r.denominator;
         int new_denom = r.denominator * s.denominator;
         Rational sub = new Rational(new_num_left - new_num_right,  new_denom);
-        return sub;
+        return simplify(sub);
     }
     
     public static Rational multiply(Rational r, Rational s) {
         int new_num = r.numerator * s.numerator;
         int new_denum = r.denominator * s.denominator;
         Rational mult = new Rational(new_num, new_denum);
-        return mult;
+        return simplify(mult);
     }
     
     public static Rational divide(Rational r, Rational s) {
         int new_num = r.numerator * s.denominator;
         int new_denum = r.denominator * s.numerator;
         Rational div = new Rational(new_num, new_denum);
-        return div;
+        return simplify(div);
     }
 
     // Finds the greatest common factor between a and b
@@ -62,12 +62,14 @@ public class Rational {
     // such that a and b are both multiples of x
     public static int greatestCommonFactor(int a, int b){
         int gcf = 0;
-        for (int i = 1; i<Math.min(a,b);i++){
-            if (a % i == 0 && b % i == 0 && i>gcf){
-                gcf = i;
+        for (int i = Math.min(a, b); i>=0;i--){
+            if (a % i == 0 && b % i == 0){
+                return i;
+
             }
+
         }
-        return -1;
+        return 1;
 
     }
 
